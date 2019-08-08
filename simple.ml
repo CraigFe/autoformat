@@ -46,22 +46,20 @@ let test_capitalize () =
 let test_str_concat () =
   Alcotest.(check string)
     "same string" "foobar"
-    (To_test.str_concat [ "foo"; "bar" ])
+    (To_test.str_concat ["foo"; "bar"])
 
 let test_list_concat () =
   Alcotest.(check (list int))
-    "same lists" [ 1; 2; 3 ]
-    (To_test.list_concat [ 1 ] [ 2; 3 ])
+    "same lists" [1; 2; 3]
+    (To_test.list_concat [1] [2; 3])
 
 (* Run it *)
 let () =
   Alcotest.run "Utils"
-    [ ( "string-case",
-        [ Alcotest.test_case "Lower case" `Quick test_lowercase;
-          Alcotest.test_case "Capitalization" `Quick test_capitalize
-        ] );
-      ( "string-concat",
-        [ Alcotest.test_case "String mashing" `Quick test_str_concat ] );
-      ( "list-concat",
-        [ Alcotest.test_case "List mashing" `Slow test_list_concat ] )
-    ]
+    [ ( "string-case"
+      , [ Alcotest.test_case "Lower case" `Quick test_lowercase
+        ; Alcotest.test_case "Capitalization" `Quick test_capitalize ] )
+    ; ( "string-concat"
+      , [Alcotest.test_case "String mashing" `Quick test_str_concat] )
+    ; ( "list-concat"
+      , [Alcotest.test_case "List mashing" `Slow test_list_concat] ) ]
